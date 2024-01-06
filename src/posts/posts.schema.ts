@@ -7,14 +7,17 @@ export class Post {
   title: string;
 
   @Prop()
-  description: number;
+  description: string;
 
   @Prop()
   thumbnail: string;
 
+  @Prop()
+  tag: string;
+
   // published date of the post article
   @Prop()
-  publishedOn: Date;
+  publishedOn: string;
 
   // date for which this post belongs to
   @Prop()
