@@ -7,8 +7,7 @@ import { WebscrapingService } from 'src/webscraping/webscraping.service';
 export class SchedulerService {
   constructor(private readonly webscrapingService: WebscrapingService) {}
 
-  // @Cron(CronExpression.EVERY_DAY_AT_4AM)
-  @Cron(CronExpression.EVERY_10_MINUTES)
+  @Cron(CronExpression.EVERY_DAY_AT_4AM)
   async scrapDailyNewsPosts() {
     await this.webscrapingService.scrapHackerNews();
   }
