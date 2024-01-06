@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import playwright from 'playwright';
+import { chromium } from 'playwright';
 
 import { Post } from 'src/posts/posts.schema';
 import { PostsService } from 'src/posts/posts.service';
@@ -10,7 +10,9 @@ export class WebscrapingService {
 
   async scrapHackerNews() {
     try {
-      const browser = await playwright.chromium.launch();
+      const browser = await chromium.connect(
+        `wss://chrome.browserless.io/playwright?token=${process.env.BROWSERLESS_API_KEY}`,
+      );
       const context = await browser.newContext();
       const page = await context.newPage();
 
@@ -20,26 +22,26 @@ export class WebscrapingService {
       const today = new Date().toISOString().split('T')[0];
 
       for (let i = 0; i < 3; i++) {
-        await page.waitForLoadState();
+        await page.waitForLoadState('domcontentloaded');
 
         const leftBox = await page.$('#left-box');
         const postBoxes = await leftBox.$$('.home-post-box');
 
-        postBoxes.forEach(async (postBox) => {
+        for (const postBox of postBoxes) {
           const thumbnailElement = await postBox.$('img');
-          const thumbnail = await thumbnailElement.getAttribute('src');
+          const thumbnail = await thumbnailElement?.getAttribute('src');
 
           const titleElement = await postBox.$('.home-title');
-          const title = await titleElement.innerText();
+          const title = await titleElement?.innerText();
 
           const descriptionElement = await postBox.$('.home-desc');
-          const description = await descriptionElement.innerText();
+          const description = await descriptionElement?.innerText();
 
           const dateElement = await postBox.$('.h-datetime');
-          const publishedOn = (await dateElement.innerHTML()).split('/i>')[1];
+          const publishedOn = (await dateElement?.innerHTML())?.split('/i>')[1];
 
           const tagElement = await postBox.$('.h-tags');
-          const tag = await tagElement.innerText();
+          const tag = await tagElement?.innerText();
 
           posts.push({
             title,
@@ -49,7 +51,7 @@ export class WebscrapingService {
             publishedOn,
             date: today,
           });
-        });
+        }
 
         const nextPageLink = await page.$('#Blog1_blog-pager-older-link');
         await nextPageLink.click();
