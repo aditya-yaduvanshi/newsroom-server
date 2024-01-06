@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { PostDocument } from './posts.schema';
+import { Post, PostDocument } from './posts.schema';
 
 @Injectable()
 export class PostsService {
@@ -21,6 +21,20 @@ export class PostsService {
       title: post.title,
       description: post.description,
       thumbnail: post.thumbnail,
+      tag: post.tag,
+      publishedOn: post.publishedOn,
+      date: post.date,
+    }));
+  }
+
+  async insertMultiple(newPosts: Post[]) {
+    const newPostsDocuments = await this.postModel.create(newPosts);
+    return newPostsDocuments.map((post) => ({
+      _id: post._id,
+      title: post.title,
+      description: post.description,
+      thumbnail: post.thumbnail,
+      tag: post.tag,
       publishedOn: post.publishedOn,
       date: post.date,
     }));
