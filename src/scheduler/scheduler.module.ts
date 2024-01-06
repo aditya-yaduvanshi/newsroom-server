@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
 
-import { WebscrapingService } from 'src/webscraping/webscraping.service'; 
+import { WebscrapingModule } from 'src/webscraping/webscraping.module';
 
 import { SchedulerService } from './scheduler.service';
 
 @Module({
-  providers: [SchedulerService, WebscrapingService],
+  imports: [WebscrapingModule],
+  providers: [SchedulerService],
 })
 export class SchedulerModule {}
