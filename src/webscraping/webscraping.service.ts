@@ -29,6 +29,8 @@ export class WebscrapingService {
 
         for (const postBox of postBoxes) {
           const thumbnailElement = await postBox.$('img');
+          await thumbnailElement?.scrollIntoViewIfNeeded();
+          await page.waitForTimeout(1000);
           const thumbnail = await thumbnailElement?.getAttribute('src');
 
           const titleElement = await postBox.$('.home-title');
