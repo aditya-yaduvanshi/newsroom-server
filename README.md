@@ -2,7 +2,7 @@
 
 ### API Documentation 
 
-Please visit [https://newzroom.uo.railway.app/api](https://newzroom.uo.railway.app/api) to check the [api documentation](https://newzroom.uo.railway.app/api).
+Please visit [https://newzroom.up.railway.app/api](https://newzroom.up.railway.app/api) to check the [api documentation](https://newzroom.up.railway.app/api).
  
 --------------------------------------------------------------------
 
