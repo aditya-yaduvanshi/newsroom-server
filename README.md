@@ -1,3 +1,11 @@
+# Newsroom
+
+### API Documentation 
+
+Please visit [https://newzroom.uo.railway.app/api](https://newzroom.uo.railway.app/api) to check the [api documentation](https://newzroom.uo.railway.app/api).
+ 
+--------------------------------------------------------------------
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
@@ -36,13 +44,13 @@ $ npm install
 
 ```bash
 # development
-$ npm run start
+$ npm run preview
 
 # watch mode
-$ npm run start:dev
+$ npm run dev
 
 # production mode
-$ npm run start:prod
+$ npm start
 ```
 
 ## Test
