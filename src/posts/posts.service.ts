@@ -12,8 +12,9 @@ export class PostsService {
   async listRecent() {
     const posts = await this.postModel
       .find({
-        date: new Date().toISOString().split('T')[0],
+        // date: new Date().toISOString().split('T')[0],
       })
+      .sort({ date: 'descending' })
       .limit(30);
 
     return posts.map((post) => ({
